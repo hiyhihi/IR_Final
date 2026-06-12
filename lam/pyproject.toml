@@ -1,0 +1,19 @@
+[project]
+name = "rag-ir-submission-final"
+version = "0.1.0"
+description = "Student RAG server: FastAPI /upload and /ask with persisted VectorDB."
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "python-dotenv",
+    "openai",
+    "numpy",
+    "sentence-transformers",
+    "transformers",
+    "torch"
+]
+
+[tool.uv]
+package = false

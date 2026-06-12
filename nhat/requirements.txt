@@ -1,0 +1,22 @@
+# Student RAG Server — Python dependencies
+# Install: pip install -r requirements.txt
+
+# Web framework
+fastapi
+uvicorn[standard]
+
+# LLM proxy client (OpenAI-compatible API)
+openai
+
+# Embeddings
+sentence-transformers
+numpy
+
+# BM25 retrieval
+rank-bm25
+
+# Pydantic (FastAPI dependency — pin for stability)
+pydantic
+
+# HTTP client (for register.py CLI)
+requests
