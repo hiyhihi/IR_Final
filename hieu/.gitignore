@@ -1,0 +1,32 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Cache directories
+cache/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Vector database
+vectordb/
+
+# Uploads
+uploads/
+
+# Logs
+*.log
+server.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.env.local
+.env.*.local

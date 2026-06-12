@@ -1,0 +1,247 @@
+================================================================================
+                  ✅ SUBMISSION PACKAGE - READY TO DEPLOY
+================================================================================
+
+This folder is a complete, self-contained RAG submission that requires ONLY
+a single command to setup, run, and submit answers.
+
+================================================================================
+INCLUDED FILES (19 files)
+================================================================================
+
+🚀 EXECUTABLES:
+   • run.sh         - Bash script for Windows (Git Bash), Mac, Linux, WSL
+   • run.bat        - Batch script for Windows Command Prompt
+
+📖 DOCUMENTATION:
+   • START_HERE.txt      - Quick start guide (READ THIS FIRST!)
+   • SETUP.md            - Detailed setup & troubleshooting guide
+   • INDEX.md            - File structure & flow explanation
+   • README.md           - Original v5 documentation
+   • SUBMISSION_READY.txt - This file
+
+🔧 APPLICATION CODE:
+   • main.py              - FastAPI server endpoint
+   • config.py            - Configuration loader
+   • rag.py               - RAG pipeline (retrieval, chunking)
+   • vector_store.py      - Vector database (FAISS)
+   • llm_client.py        - LLM proxy wrapper
+   • client.py            - Teacher API client
+   • download_model.py    - Embedding model downloader
+
+⚙️ CONFIGURATION:
+   • .env                 - Configuration (CRITICAL: Check teacher URL!)
+   • .env.example         - Configuration template
+   • pyproject.toml       - Python project metadata
+   • requirements.txt     - Dependencies list
+
+📋 UTILITIES:
+   • .gitignore           - Git ignore rules
+
+================================================================================
+QUICK START (Choose one)
+================================================================================
+
+🟢 WINDOWS - GIT BASH (Recommended):
+   1. Open Git Bash
+   2. cd /path/to/submission
+   3. bash run.sh
+
+🔵 WINDOWS - COMMAND PROMPT:
+   1. Open Command Prompt
+   2. cd C:\path\to\submission
+   3. run.bat
+
+🟣 WINDOWS - POWERSHELL:
+   1. Open PowerShell
+   2. cd C:\path\to\submission
+   3. bash run.sh
+
+🐧 LINUX / MAC / WSL:
+   1. Open terminal
+   2. cd /path/to/submission
+   3. bash run.sh
+
+================================================================================
+WHAT HAPPENS WHEN YOU RUN IT
+================================================================================
+
+Automatic sequence:
+
+   1. ✓ Check & install uv package manager (if needed)
+   2. ✓ Create Python virtual environment (.venv/)
+   3. ✓ Install all dependencies (FastAPI, torch, etc.)
+   4. ✓ Download embedding model (keepitreal/vietnamese-sbert)
+   5. ✓ Start FastAPI server on http://127.0.0.1:5004
+   6. ✓ Register with teacher server
+   7. ✓ Submit answers (evaluate - takes 10-15 minutes)
+   8. ✓ Fetch and display results
+   9. ✓ Cleanup & exit
+
+   Total time: ~15-20 minutes (including model download + evaluation)
+
+================================================================================
+BEFORE YOU RUN
+================================================================================
+
+✅ Checklist:
+
+   [ ] Python 3.10 or higher installed
+   [ ] .env file exists and has correct TEACHER_BASE_URL
+   [ ] Network connection works
+   [ ] Port 5004 is not in use
+   [ ] Read START_HERE.txt (takes 30 seconds)
+
+Then just run: bash run.sh (or run.bat)
+
+================================================================================
+KEY FILES TO KNOW
+================================================================================
+
+If something goes wrong:
+
+   • server.log          - Server activity log
+   • SETUP.md            - Troubleshooting guide
+   • .env                - Configuration (check this first!)
+
+To understand the flow:
+   • INDEX.md            - File structure & execution flow
+   • main.py             - Server logic (lines 1-50)
+   • client.py           - How submission works
+
+================================================================================
+CONFIGURATION (.env)
+================================================================================
+
+MUST SET:
+   TEACHER_BASE_URL=http://192.168.50.218:8000/api/v1    (Change this!)
+   STUDENT_ID=B22BENCHMARK                                (Change this!)
+   STUDENT_SERVER_URL=http://127.0.0.1:5004
+   LLM_BASE_URL=http://127.0.0.1:8888/v1
+
+GOOD DEFAULTS (can change):
+   DEVICE=cpu                    (or cuda if GPU available)
+   TOP_K=8                       (retrieval top-k chunks)
+   MAX_CONTEXT_CHARS=2800        (context length for LLM)
+   LLM_TIMEOUT=45                (seconds)
+   ENABLE_ANSWER_CACHE=true      (faster on re-runs)
+
+================================================================================
+AFTER YOU RUN
+================================================================================
+
+After successful completion:
+
+   ✅ Results printed to console
+   ✅ server.log contains full execution log
+   ✅ vectordb/ folder created (vector embeddings)
+   ✅ cache/ folder created (answer cache)
+   ✅ .venv/ folder created (Python packages)
+
+Next time you want to run:
+   1. Just run again: bash run.sh
+   2. Or manually: source .venv/bin/activate && python main.py
+
+================================================================================
+FOLDER STRUCTURE (After first run)
+================================================================================
+
+submission/
+├── run.sh                 ← RUN THIS (bash/WSL/Mac/Linux)
+├── run.bat                ← OR RUN THIS (Windows CMD)
+├── START_HERE.txt         ← Read first
+├── SETUP.md               ← Full guide
+├── INDEX.md               ← Structure & flow
+├── SUBMISSION_READY.txt   ← This file
+├── main.py                ← Server
+├── config.py
+├── rag.py
+├── vector_store.py
+├── llm_client.py
+├── client.py
+├── .env                   ← Configuration (IMPORTANT!)
+├── .env.example
+├── requirements.txt
+├── pyproject.toml
+├── .gitignore
+│
+├── .venv/                 ← Created after first run (Python packages)
+├── vectordb/              ← Created after first run (Vector DB)
+├── cache/                 ← Created after first run (Answer cache)
+├── uploads/               ← Created during run (Documents)
+├── server.log             ← Created during run (Logs)
+└── __pycache__/           ← Created during run (Python cache)
+
+================================================================================
+SYSTEM REQUIREMENTS
+================================================================================
+
+Minimum:
+   • Python 3.10+
+   • 4GB RAM
+   • 2GB disk space
+   • Internet connection (to teacher & LLM servers)
+
+Recommended:
+   • Python 3.11+
+   • 8GB+ RAM
+   • 5GB disk space
+   • GPU (CUDA 11.8+) for faster inference
+
+Tested on:
+   • Windows 10/11 (Git Bash, WSL, CMD)
+   • Ubuntu 20.04+
+   • macOS 12+
+
+================================================================================
+SUPPORT & TROUBLESHOOTING
+================================================================================
+
+If run.sh fails:
+
+   1. Check your Python version: python --version
+   2. Check .env configuration
+   3. Read SETUP.md (Troubleshooting section)
+   4. Check server.log for errors
+   5. Ensure network connectivity
+
+Common issues & solutions:
+   • "Port 5004 already in use" → Kill other process on that port
+   • "Teacher URL not found" → Check .env TEACHER_BASE_URL
+   • "Timeout waiting for server" → Check server.log
+   • "Connection refused" → Check network & firewall
+
+================================================================================
+VERSION INFORMATION
+================================================================================
+
+Build: v5 Unified
+Based on: RAG IR v5 (hybrid retrieval + answer caching + vector DB)
+Optimized for: Weak ~4k-context LLM + 100 questions × 5 submissions
+Language: Python 3.10+
+Framework: FastAPI + sentence-transformers + FAISS
+
+Features:
+   ✓ Hybrid retrieval (BM25 + semantic search)
+   ✓ Answer caching (faster re-runs)
+   ✓ Persistent vector database
+   ✓ Configurable LLM backend
+   ✓ Chunk size optimization (~700 chars)
+   ✓ Context window optimization (~2800 chars)
+
+================================================================================
+READY TO SUBMIT?
+================================================================================
+
+You have everything you need. Just run:
+
+   bash run.sh
+   (or run.bat on Windows Command Prompt)
+
+That's it! The script handles the rest.
+
+Questions? See START_HERE.txt or SETUP.md
+
+Good luck with your RAG submission! 🚀
+
+================================================================================

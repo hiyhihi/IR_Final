@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/python.exe -c ' *)",
+      "Bash(ls .env)",
+      "Bash(cp \"C:\\\\Users\\\\ADMIN\\\\Downloads\\\\submission_final\\\\text_utils.py\" \"C:\\\\Users\\\\ADMIN\\\\Downloads\\\\submission\\\\submission\\\\text_utils.py\" && echo copied)",
+      "Bash(.venv/Scripts/python.exe -X utf8 _smoke_test.py)",
+      "Bash(.venv/Scripts/python.exe -X utf8 _hybrid_test.py)"
+    ]
+  }
+}

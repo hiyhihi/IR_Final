@@ -1,0 +1,66 @@
+================================================================================
+                    RAG IR SUBMISSION - ONE-CLICK RUN
+================================================================================
+
+📌 QUICK START (Windows):
+
+   Option 1: Git Bash (Recommended)
+   --------------------------------
+   1. Open Git Bash
+   2. cd to this folder
+   3. Run: bash run.sh
+
+   Option 2: Command Prompt
+   ----------------------
+   1. Open Command Prompt (Win + R → cmd)
+   2. cd to this folder
+   3. Run: run.bat
+
+   Option 3: PowerShell
+   -------------------
+   1. Open PowerShell
+   2. cd to this folder
+   3. Run: bash run.sh
+
+================================================================================
+
+🎯 WHAT WILL HAPPEN:
+
+   ✓ Install uv (if needed)
+   ✓ Create Python virtual environment
+   ✓ Install all dependencies
+   ✓ Download embedding model
+   ✓ Start server
+   ✓ Register with teacher
+   ✓ Submit answers (evaluate)
+   ✓ Show results
+   ✓ Cleanup
+
+   Total time: ~15-20 minutes (includes model download + evaluation)
+
+================================================================================
+
+⚙️ BEFORE YOU START:
+
+   1. Make sure Python 3.10+ is installed
+   2. Check .env file has correct teacher server URL
+   3. Close any apps using port 5004 (unlikely)
+
+================================================================================
+
+📖 FOR MORE DETAILS:
+
+   Read SETUP.md for:
+   - Detailed instructions for each OS
+   - Configuration options
+   - Troubleshooting guide
+   - How to run without full setup next time
+
+================================================================================
+
+🚀 READY? Just run:
+
+   bash run.sh
+   (or run.bat on Windows Command Prompt)
+
+================================================================================

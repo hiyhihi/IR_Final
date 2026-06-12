@@ -1,0 +1,307 @@
+================================================================================
+                SUBMISSION PACKAGE CONTENTS & MANIFEST
+================================================================================
+
+Total: 17 Files | Size: ~500KB (before runtime)
+
+================================================================================
+📍 ENTRY POINTS (Pick one to run)
+================================================================================
+
+run.sh                 4.6 KB    ← Bash script for Windows/Mac/Linux/WSL
+run.bat                1.9 KB    ← Batch script for Windows Command Prompt
+
+BOTH do the exact same thing, just pick based on your shell:
+  • run.sh   : Use on Git Bash, PowerShell, Linux, Mac, WSL
+  • run.bat  : Use on Windows Command Prompt (cmd.exe)
+
+================================================================================
+📖 DOCUMENTATION (Read in order)
+================================================================================
+
+START_HERE.txt               1.8 KB   | Quick start overview (30 seconds)
+SETUP.md                     4.0 KB   | Detailed guide + troubleshooting
+INDEX.md                     5.5 KB   | File structure & execution flow
+SUBMISSION_READY.txt         7.8 KB   | Checklist & package info
+PACKAGE_CONTENTS.txt         [you are here]
+README.md                    2.7 KB   | Original v5 documentation
+
+Reading order:
+  1. START_HERE.txt (very quick)
+  2. SETUP.md (if you have questions or errors)
+  3. INDEX.md (to understand architecture)
+
+================================================================================
+🔧 APPLICATION CODE (Main RAG system)
+================================================================================
+
+main.py                     10.3 KB   | FastAPI server
+                                      | - POST /upload (add documents)
+                                      | - POST /ask (query & answer)
+                                      | Handles all teacher requests
+                                      |
+config.py                    2.8 KB   | Configuration loader
+                                      | Reads environment variables from .env
+                                      | Provides Config object to app
+                                      |
+rag.py                       7.0 KB   | RAG pipeline core
+                                      | - chunk_text() - split documents
+                                      | - retrieve() - hybrid search
+                                      | Uses BM25 + semantic search
+                                      |
+vector_store.py              6.4 KB   | Vector database management
+                                      | Uses FAISS for semantic search
+                                      | Persists to vectordb/
+                                      |
+llm_client.py                6.1 KB   | LLM API wrapper
+                                      | - ask_llm() - call proxy
+                                      | - extract_options() - parse answer
+                                      | - compact_context() - optimize tokens
+                                      |
+client.py                    2.3 KB   | Teacher server client
+                                      | Commands:
+                                      |   - register: register with teacher
+                                      |   - evaluate: submit answers
+                                      |   - result: get score
+                                      |   - reset: reset state
+                                      |
+download_model.py            0.6 KB   | Helper to download embedding model
+                                      | Auto-run by run.sh
+                                      | Downloads keepitreal/vietnamese-sbert
+
+================================================================================
+⚙️ CONFIGURATION FILES
+================================================================================
+
+.env                         0.6 KB   | RUNTIME CONFIGURATION
+                                      | ⚠️ MUST be configured before running!
+                                      | Key variables:
+                                      |   - TEACHER_BASE_URL (teacher server)
+                                      |   - STUDENT_ID (your ID)
+                                      |   - LLM_BASE_URL (LLM proxy)
+                                      |   - DEVICE (cpu/cuda)
+                                      |   - TOP_K, MAX_CONTEXT_CHARS, etc.
+                                      |
+.env.example                 0.8 KB   | Example configuration template
+                                      | Reference for .env format
+                                      |
+pyproject.toml               0.4 KB   | Python project metadata
+                                      | Tells uv package manager about dependencies
+                                      | Python version: >=3.10
+                                      |
+requirements.txt             0.1 KB   | Pip-compatible dependency list
+                                      | Used as fallback if pyproject.toml not found
+                                      | Dependencies:
+                                      |   - fastapi (server)
+                                      |   - uvicorn (ASGI server)
+                                      |   - torch (neural networks)
+                                      |   - sentence-transformers (embeddings)
+                                      |   - openai (LLM client)
+                                      |   - httpx (HTTP client)
+                                      |   - numpy (numerical)
+                                      |   - pydantic (validation)
+                                      |   - python-dotenv (env loading)
+                                      |
+.gitignore                   0.3 KB   | Git ignore rules
+                                      | Excludes: .venv/, cache/, vectordb/,
+                                      |           __pycache__/, *.log, .env.local
+
+================================================================================
+📊 RUNTIME DIRECTORIES (Created when you run)
+================================================================================
+
+After running the script, these directories will be created:
+
+.venv/                       | Python virtual environment
+                             | Contains: Python executable, packages, etc.
+                             | Size: ~1-2 GB (includes torch, transformers)
+                             | ⚠️ Can be deleted and recreated anytime
+                             |
+vectordb/                    | Vector database storage
+                             | Contains: FAISS index + embeddings
+                             | Size: ~500 MB (depends on document size)
+                             | ✅ Keep between runs for faster initialization
+                             |
+cache/                       | Answer cache
+                             | Contains: Previously computed answers (JSON)
+                             | Size: ~10-100 MB (grows with answers)
+                             | ✅ Keep between runs for instant answers
+                             |
+uploads/                     | Uploaded documents
+                             | Contains: Files teacher uploaded
+                             | Size: depends on documents
+                             |
+__pycache__/                 | Python bytecode cache
+                             | Auto-generated, safe to delete
+                             | Size: negligible
+                             |
+server.log                   | Server execution log
+                             | Contains: all server output & errors
+                             | Size: ~100 KB per run
+                             | Useful for debugging
+
+================================================================================
+📦 DEPENDENCIES (Auto-installed by run.sh)
+================================================================================
+
+Primary:
+  • fastapi              - Web framework
+  • uvicorn              - ASGI server
+  • pydantic             - Data validation
+  • python-dotenv        - Environment variable loading
+  • openai               - OpenAI API client
+  • httpx                - HTTP client
+
+ML/NLP:
+  • torch                - Deep learning (large download ~2GB)
+  • sentence-transformers - Embeddings model
+  • transformers         - NLP models
+  • numpy                - Numerical computing
+  • faiss-cpu / faiss-gpu - Vector search
+
+All installed from requirements.txt via: uv pip install
+
+================================================================================
+🔄 WORKFLOW (What happens when you run run.sh)
+================================================================================
+
+1. Check uv installed
+   └─ If not: pip install uv
+
+2. Create .venv
+   └─ uv venv .venv
+
+3. Install dependencies
+   └─ uv pip install -r requirements.txt
+
+4. Download embedding model
+   └─ python download_model.py
+   └─ Downloads: keepitreal/vietnamese-sbert (~500 MB)
+
+5. Start server
+   └─ python main.py
+   └─ Starts FastAPI on http://127.0.0.1:5004
+   └─ Runs in background
+
+6. Register with teacher
+   └─ python client.py register
+   └─ Tells teacher where our server is
+
+7. Run evaluation
+   └─ python client.py evaluate
+   └─ Teacher sends 100 questions × 5 times
+   └─ We answer all, store in cache
+   └─ Takes 10-15 minutes
+
+8. Get results
+   └─ python client.py result
+   └─ Fetch and display score
+
+9. Cleanup
+   └─ Kill server process
+
+================================================================================
+📋 FILE SIZES & DOWNLOAD
+================================================================================
+
+Source package (.git excluding):        ~500 KB
+With dependencies (.venv):              ~3-4 GB
+With embeddings (vectordb):             ~500 MB - 2 GB
+Total disk space needed:                ~5 GB minimum
+
+Time to setup (first run):
+  • Model download:                     3-5 minutes
+  • Dependency installation:            2-3 minutes
+  • Evaluation (100 Q × 5 times):       10-15 minutes
+  Total:                                ~20 minutes
+
+Subsequent runs:
+  • Model cached:                       Skip model download
+  • Dependencies cached:                Skip installation
+  • Answers cached:                     Instant if same questions
+  Total:                                ~1-2 minutes for different questions
+
+================================================================================
+🔐 SECURITY NOTES
+================================================================================
+
+Files that should NOT be committed to public git:
+  • .env (contains teacher/student URLs, student ID)
+  • .env.local (local overrides)
+  • cache/ (contains answers)
+  • vectordb/ (contains embeddings)
+  • uploads/ (contains documents)
+
+The .gitignore file handles this automatically.
+
+================================================================================
+✅ COMPLETENESS CHECKLIST
+================================================================================
+
+For deployment, verify:
+
+[✓] Entry points
+    [✓] run.sh exists and is executable
+    [✓] run.bat exists and is executable
+
+[✓] Documentation
+    [✓] START_HERE.txt
+    [✓] SETUP.md
+    [✓] INDEX.md
+    [✓] SUBMISSION_READY.txt
+    [✓] PACKAGE_CONTENTS.txt
+    [✓] README.md
+
+[✓] Application code
+    [✓] main.py (server)
+    [✓] config.py (config)
+    [✓] rag.py (retrieval)
+    [✓] vector_store.py (FAISS)
+    [✓] llm_client.py (LLM)
+    [✓] client.py (teacher API)
+    [✓] download_model.py (model)
+
+[✓] Configuration
+    [✓] .env (configured)
+    [✓] .env.example (template)
+    [✓] pyproject.toml (uv config)
+    [✓] requirements.txt (dependencies)
+
+[✓] Utilities
+    [✓] .gitignore (git rules)
+
+Total: 17 files ready to deploy ✅
+
+================================================================================
+🚀 DEPLOYMENT INSTRUCTIONS
+================================================================================
+
+For Windows user:
+
+1. Download this folder to your Desktop or Documents
+2. Open command prompt or Git Bash
+3. cd to submission folder
+4. Run: bash run.sh (or run.bat)
+5. Wait 20 minutes
+6. See results in console
+
+For Linux/Mac user:
+
+1. Download/clone this folder
+2. Open terminal
+3. cd to submission folder
+4. Run: bash run.sh
+5. Wait 20 minutes
+6. See results in console
+
+That's it! Everything else is automatic.
+
+================================================================================
+
+Questions? See:
+  • START_HERE.txt (quick overview)
+  • SETUP.md (detailed guide)
+  • INDEX.md (technical details)
+  • SUBMISSION_READY.txt (checklist)
+
+================================================================================

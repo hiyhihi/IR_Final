@@ -1,0 +1,20 @@
+[project]
+name = "rag-ir-v5"
+version = "0.1.0"
+description = "Student RAG server v5: hybrid retrieval + answer cache + persisted VectorDB, tuned for a weak ~4k-context proxy LLM."
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "python-dotenv",
+    "openai",
+    "numpy",
+    "httpx",
+    "sentence-transformers",
+    "transformers",
+    "torch",
+]
+
+[tool.uv]
+package = false
