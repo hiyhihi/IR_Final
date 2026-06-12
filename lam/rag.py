@@ -8,8 +8,8 @@ from typing import Any
 
 import numpy as np
 
-import lam.config as config
-from lam.text_utils import clean_document_text, clean_inline_text, tokenize_for_search
+import config
+from text_utils import clean_document_text, clean_inline_text, tokenize_for_search
 
 _RERANKER_CACHE: dict[tuple[str, str], Any] = {}
 
@@ -89,7 +89,7 @@ def _sbert_encode(texts: list[str]) -> np.ndarray:
 def embed_texts(texts: list[str]) -> np.ndarray:
     backend = config.RETRIEVER_BACKEND
     if backend == "openai":
-        from lam.llm_client import embed_openai
+        from llm_client import embed_openai
 
         return embed_openai(texts)
     if backend in {"sbert", "hybrid", "vector"}:

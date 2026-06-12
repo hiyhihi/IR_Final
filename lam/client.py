@@ -7,7 +7,7 @@ import sys
 
 import httpx
 
-import lam.config as config
+import config
 
 
 def _headers() -> dict[str, str]:
@@ -79,7 +79,7 @@ def main() -> None:
         "result": result,
     }[args.action]()
 
- 
+
 if __name__ == "__main__":
     try:
         main()

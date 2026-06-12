@@ -8,8 +8,8 @@ from typing import Optional
 
 import numpy as np
 
-import lam.config as config
-from lam.rag import bm25_rank, normalize_scores, rerank_results
+import config
+from rag import bm25_rank, normalize_scores, rerank_results
 
 
 def _rrf_fuse(rankings: list[list[tuple[int, float]]], rrf_k: int) -> dict[int, float]:

@@ -12,11 +12,11 @@ from typing import List, Optional
 from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 
-import lam.config as config
-from lam.llm_client import ask_llm, compact_context, extract_options
-from lam.rag import chunk_text
-from lam.text_utils import clean_inline_text, compose_retrieval_query
-from lam.vector_store import store
+import config
+from llm_client import ask_llm, compact_context, extract_options
+from rag import chunk_text
+from text_utils import clean_inline_text, compose_retrieval_query
+from vector_store import store
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger("student-server")
@@ -79,7 +79,7 @@ def _index(chunks: list[str]) -> None:
     if config.RETRIEVER_BACKEND in {"tfidf", "bm25"}:
         store.add(chunks)
     else:
-        from lam.rag import embed_texts
+        from rag import embed_texts
 
         embs = embed_texts(chunks)
         store.add(chunks, embs)
@@ -93,7 +93,7 @@ def _retrieve(question: str, options: dict[str, str], top_k: int) -> list[tuple[
     )
     if config.RETRIEVER_BACKEND in {"tfidf", "bm25"}:
         return store.search(retrieval_query, top_k=top_k)
-    from lam.rag import embed_query
+    from rag import embed_query
 
     q = embed_query(retrieval_query)
     if config.RETRIEVER_BACKEND == "hybrid":

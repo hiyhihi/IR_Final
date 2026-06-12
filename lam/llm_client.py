@@ -8,8 +8,8 @@ from typing import Mapping
 import numpy as np
 from openai import OpenAI
 
-import lam.config as config
-from lam.text_utils import canonicalize_for_match, clean_inline_text, question_stem, strip_accents
+import config
+from text_utils import canonicalize_for_match, clean_inline_text, question_stem, strip_accents
 
 SYSTEM_PROMPT = (
     "Ban la tro ly tra loi trac nghiem tieng Viet ve van ban phap ly. "
