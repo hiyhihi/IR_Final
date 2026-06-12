@@ -42,3 +42,66 @@ _OPTION_RE = re.compile(
     r"(?:^|\n|\s)([ABCD])[\).:\-]\s*(.*?)(?=(?:\n|\s)[ABCD][\).:\-]\s*|$)",
     re.IGNORECASE | re.DOTALL,
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SYSTEM_PROMPT = (
+    "Ban la tro ly tra loi cau hoi trac nghiem tieng Viet dua tren tai lieu. "
+    "Chi duoc dua vao CONTEXT, khong dung kien thuc ben ngoai. "
+    "Uu tien chi tiet xuat hien truc tiep trong CONTEXT nhu ten rieng, con so, ngay thang, "
+    "don vi, thoi han, dinh nghia, thuat ngu, trinh tu cac buoc, nguyen nhan - ket qua. "
+    "Neu cau hoi mang nghia phu dinh (KHONG, NGOAI TRU, nao SAI, khong dung), "
+    "hay chon phuong an KHONG duoc CONTEXT ung ho. "
+    "Neu nhieu phuong an co ve dung, chon phuong an duoc CONTEXT ung ho truc tiep va day du nhat. "
+    "Neu CONTEXT khong du thong tin, van phai chon phuong an hop ly nhat. "
+    "Chi tra ve duy nhat mot chu cai in hoa A, B, C hoac D."
+)
+
+USER_PROMPT_EVIDENCE = """CONTEXT:
+{context}
+
+CAU HOI:
+{question}
+
+CAC LUA CHON:
+{options_block}
+
+Huong dan noi bo:
+Doi chieu TUNG lua chon voi CONTEXT: tim cau/doan ung ho hoac mau thuan voi no.
+Chu y ten rieng, con so, ngay thang, don vi, dinh nghia, trinh tu va dieu kien.
+Phuong an dung thuong khop gan nguyen van voi CONTEXT; phuong an sai thuong dung
+mot phan nhung lech mot chi tiet nho (sai so, sai ten, sai thu tu, sai dieu kien).
+Neu cau hoi mang nghia phu dinh (KHONG/NGOAI TRU/nao SAI), dao nguoc tieu chi chon.
+
+Tra loi chi mot chu cai A/B/C/D:"""
+
+USER_PROMPT_COMPACT = """CONTEXT:
+{context}
+
+CAU HOI:
+{question}
+{options_block}
+Tra loi (chi mot chu cai A/B/C/D):"""
+
+_WEAK_TOKENS = {
+    "la", "gi", "nao", "de", "cua", "tren", "trong", "mot", "cac", "theo",
+    "va", "voi", "cho", "khi", "nhu", "den", "ve", "nay", "day", "se", "da",
+    "bi", "duoc", "deu", "hoac", "neu", "gom", "sau", "truoc", "rang",
+}
+
+_NEGATION_MARKERS = (
+    " nao khong ", " khong phai ", " khong dung ", " khong thuoc ", " khong nam ",
+    " khong bao gom ", " ngoai tru ", " nao sai ", " la sai ", " deu sai ",
+)
